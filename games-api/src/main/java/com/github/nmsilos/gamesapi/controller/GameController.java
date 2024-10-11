@@ -28,9 +28,10 @@ public class GameController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Game> getById(@PathVariable Long id) {
+    public ResponseEntity<GameResponseDTO> getById(@PathVariable Long id) {
         Game game = gameService.getById(id);
-        return ResponseEntity.ok().body(game);
+        GameResponseDTO response = GameMapper.toGameResponseDto(game);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping
