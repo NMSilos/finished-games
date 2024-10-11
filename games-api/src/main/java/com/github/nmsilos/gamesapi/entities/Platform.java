@@ -24,7 +24,7 @@ public class Platform implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "platforms")
-    private List<Games> games = new ArrayList<Games>();
+    private List<Game> games = new ArrayList<Game>();
 
     public Platform(String name) {
         this.name = name;

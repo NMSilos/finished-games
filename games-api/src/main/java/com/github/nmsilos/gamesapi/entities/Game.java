@@ -13,7 +13,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Games implements Serializable {
+public class Game implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class Games implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "platformId"))
     private List<Platform> platforms = new ArrayList<>();
 
-    public Games(String title, String description, String developerCompany, Year releaseYear) {
+    public Game(String title, String description, String developerCompany, Year releaseYear) {
         this.title = title;
         this.description = description;
         this.developerCompany = developerCompany;
