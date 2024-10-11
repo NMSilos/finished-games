@@ -34,4 +34,10 @@ public class GameController {
         return ResponseEntity.ok().body(games);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Game> update(@PathVariable Long id, @RequestBody Game game) {
+        Game responseGame = gameService.update(id, game);
+        return ResponseEntity.ok().body(responseGame);
+    }
+
 }

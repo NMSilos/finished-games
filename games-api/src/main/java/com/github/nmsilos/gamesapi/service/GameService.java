@@ -28,4 +28,15 @@ public class GameService {
     public List<Game> getAll() {
         return gameRepository.findAll();
     }
+
+    @Transactional
+    public Game update(Long id, Game newGame) {
+        Game oldGame = getById(id);
+        oldGame.setTitle(newGame.getTitle());
+        oldGame.setDescription(newGame.getDescription());
+        oldGame.setDeveloperCompany(newGame.getDeveloperCompany());
+        oldGame.setReleaseYear(newGame.getReleaseYear());
+        return gameRepository.save(oldGame);
+    }
+
 }
