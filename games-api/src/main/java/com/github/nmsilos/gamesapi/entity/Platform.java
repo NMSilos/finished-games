@@ -3,6 +3,7 @@ package com.github.nmsilos.gamesapi.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
