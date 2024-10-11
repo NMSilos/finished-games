@@ -19,5 +19,8 @@ public class PlatformService {
         return platformRepository.save(platform);
     }
 
-    
+    @Transactional(readOnly = true)
+    public List<Platform> getAll() {
+        return platformRepository.findAll();
+    }
 }

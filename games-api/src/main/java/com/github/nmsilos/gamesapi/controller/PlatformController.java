@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/platforms")
@@ -17,6 +19,12 @@ public class PlatformController {
     public ResponseEntity<Platform> create(@RequestBody Platform platform) {
         platformService.create(platform);
         return ResponseEntity.ok().body(platform);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Platform>> getAll() {
+        List<Platform> platforms = platformService.getAll();
+        return ResponseEntity.ok().body(platforms);
     }
 
 }
