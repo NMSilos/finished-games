@@ -39,4 +39,10 @@ public class PlatformController {
         return ResponseEntity.ok().body(responsePlatform);
     }
 
+    @PutMapping("/addgame/{platformId}/game")
+    public ResponseEntity<Platform> addGame(@PathVariable Long platformId, @RequestParam String title) {
+        Platform responsePlatform = platformService.addGame(platformId, title);
+        return ResponseEntity.ok().body(responsePlatform);
+    }
+
 }

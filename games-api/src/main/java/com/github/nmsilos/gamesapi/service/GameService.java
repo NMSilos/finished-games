@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,12 @@ public class GameService {
     @Transactional(readOnly = true)
     public Game getById(Long id) {
         return gameRepository.findById(id).orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public Game getByTitle(String title) {
+        Optional<Game> game = gameRepository.findByTitle(title);
+        return game.orElse(null);
     }
 
     @Transactional(readOnly = true)
