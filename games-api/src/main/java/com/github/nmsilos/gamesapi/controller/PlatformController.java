@@ -4,6 +4,7 @@ import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.service.PlatformService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,12 @@ public class PlatformController {
     @PostMapping
     public ResponseEntity<Platform> create(@RequestBody Platform platform) {
         platformService.create(platform);
+        return ResponseEntity.ok().body(platform);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Platform> getById(@PathVariable Long id) {
+        Platform platform = platformService.getById(id);
         return ResponseEntity.ok().body(platform);
     }
 

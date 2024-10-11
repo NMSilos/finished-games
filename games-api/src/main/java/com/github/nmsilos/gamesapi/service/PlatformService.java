@@ -23,4 +23,9 @@ public class PlatformService {
     public List<Platform> getAll() {
         return platformRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public Platform getById(Long id) {
+        return platformRepository.findById(id).orElse(null);
+    }
 }
