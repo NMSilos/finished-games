@@ -39,10 +39,16 @@ public class PlatformController {
         return ResponseEntity.ok().body(responsePlatform);
     }
 
-    @PutMapping("/addgame/{platformId}/game")
-    public ResponseEntity<Platform> addGame(@PathVariable Long platformId, @RequestParam String title) {
-        Platform responsePlatform = platformService.addGame(platformId, title);
+    @PostMapping("/addgame")
+    public ResponseEntity<Platform> addGame(@RequestParam Long platformId, @RequestParam String gameTitle) {
+        Platform responsePlatform = platformService.addGame(platformId, gameTitle);
         return ResponseEntity.ok().body(responsePlatform);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        platformService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

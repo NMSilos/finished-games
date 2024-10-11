@@ -3,12 +3,11 @@ package com.github.nmsilos.gamesapi.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "platforms")
@@ -25,7 +24,7 @@ public class Platform implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "platforms")
-    private List<Game> games = new ArrayList<Game>();
+    private Set<Game> games = new HashSet<>();
 
     public Platform(String name) {
         this.name = name;

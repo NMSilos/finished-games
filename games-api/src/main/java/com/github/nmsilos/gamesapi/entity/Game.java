@@ -2,6 +2,8 @@ package com.github.nmsilos.gamesapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -32,11 +34,12 @@ public class Game implements Serializable {
     private Year releaseYear;
 
     @ManyToMany
+    @Cascade(CascadeType.ALL)
     @JoinTable(
             name = "games_platforms",
-            joinColumns = @JoinColumn(name = "gameId"),
-            inverseJoinColumns = @JoinColumn(name = "platformId"))
-    private List<Platform> platforms = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "game_fk"),
+            inverseJoinColumns = @JoinColumn(name = "platform_fk"))
+    private Set<Platform> platforms = new HashSet<>();
 
     public Game(String title, String description, String developerCompany, Year releaseYear) {
         this.title = title;

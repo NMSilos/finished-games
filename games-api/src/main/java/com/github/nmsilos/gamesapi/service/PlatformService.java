@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -41,13 +42,31 @@ public class PlatformService {
     }
 
     @Transactional
-    public Platform addGame(Long platformId, String title) {
+    public Platform addGame(Long platformId, String gameTitle) {
+
         Platform platform = getById(platformId);
-        Optional<Game> game = gameRepository.findByTitle(title);
-        if (game.isPresent()) {
+        Optional<Game> game = gameRepository.findByTitle(gameTitle);
+
+        if(game.isPresent()) {
             Game gameObj = game.get();
             platform.getGames().add(gameObj);
+            gameObj.getPlatforms().add(platform);
+            gameRepository.save(gameObj);
+            return platformRepository.save(platform);
+        } else {
+            throw new RuntimeException("Game not found");
         }
-        return platformRepository.save(platform);
+
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Platform platform = getById(id);
+        Set<Game> games = platform.getGames();
+        for (Game game : games) {
+            game.getPlatforms().remove(platform);
+        }
+        platformRepository.save(platform);
+        platformRepository.delete(platform);
     }
 }
