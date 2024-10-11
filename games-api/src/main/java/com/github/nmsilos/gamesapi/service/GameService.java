@@ -16,5 +16,9 @@ public class GameService {
     public Game create(Game game) {
         return gameRepository.save(game);
     }
-    
+
+    @Transactional(readOnly = true)
+    public Game getById(Long id) {
+        return gameRepository.findById(id).orElse(null);
+    }
 }
