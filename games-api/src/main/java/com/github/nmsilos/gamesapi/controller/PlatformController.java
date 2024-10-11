@@ -1,8 +1,12 @@
 package com.github.nmsilos.gamesapi.controller;
 
+import com.github.nmsilos.gamesapi.dto.PlatformCreateDTO;
+import com.github.nmsilos.gamesapi.dto.PlatformResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Platform;
+import com.github.nmsilos.gamesapi.mapper.PlatformMapper;
 import com.github.nmsilos.gamesapi.service.PlatformService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +20,10 @@ public class PlatformController {
     private final PlatformService platformService;
 
     @PostMapping
-    public ResponseEntity<Platform> create(@RequestBody Platform platform) {
-        platformService.create(platform);
-        return ResponseEntity.ok().body(platform);
+    public ResponseEntity<PlatformResponseDTO> create(@RequestBody PlatformCreateDTO platformDto) {
+        Platform platform = PlatformMapper.toPlatform(platformDto);
+        PlatformResponseDTO response = PlatformMapper.toPlatformResponseDTO(platformService.create(platform));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
@@ -40,8 +45,8 @@ public class PlatformController {
     }
 
     @PostMapping("/addgame")
-    public ResponseEntity<Platform> addGame(@RequestParam Long platformId, @RequestParam String gameTitle) {
-        Platform responsePlatform = platformService.addGame(platformId, gameTitle);
+    public ResponseEntity<PlatformResponseDTO> addGame(@RequestParam Long platformId, @RequestParam String gameTitle) {
+        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDTO(platformService.addGame(platformId, gameTitle));
         return ResponseEntity.ok().body(responsePlatform);
     }
 
