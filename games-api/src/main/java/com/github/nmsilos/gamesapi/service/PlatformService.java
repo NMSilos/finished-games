@@ -28,4 +28,11 @@ public class PlatformService {
     public Platform getById(Long id) {
         return platformRepository.findById(id).orElse(null);
     }
+
+    @Transactional
+    public Platform update(Long id, Platform newPlatform) {
+        Platform oldPlatform = getById(id);
+        oldPlatform.setName(newPlatform.getName());
+        return platformRepository.save(oldPlatform);
+    }
 }
