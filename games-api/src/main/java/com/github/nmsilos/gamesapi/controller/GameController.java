@@ -16,4 +16,10 @@ public class GameController {
 
     private final GameService gameService;
 
+    @PostMapping
+    public ResponseEntity<Game> create(@RequestBody Game game) {
+        gameService.create(game);
+        return ResponseEntity.ok().body(game);
+    }
+
 }

@@ -12,5 +12,9 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
+    @Transactional
+    public Game create(Game game) {
+        return gameRepository.save(game);
+    }
     
 }
