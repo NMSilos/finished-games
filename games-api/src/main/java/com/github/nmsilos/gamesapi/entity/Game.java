@@ -1,4 +1,4 @@
-package com.github.nmsilos.gamesapi.entities;
+package com.github.nmsilos.gamesapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
