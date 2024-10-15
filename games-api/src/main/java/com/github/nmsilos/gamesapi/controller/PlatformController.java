@@ -1,6 +1,7 @@
 package com.github.nmsilos.gamesapi.controller;
 
 import com.github.nmsilos.gamesapi.dto.PlatformCreateDTO;
+import com.github.nmsilos.gamesapi.dto.PlatformNoListDTO;
 import com.github.nmsilos.gamesapi.dto.PlatformResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.mapper.PlatformMapper;
@@ -22,31 +23,33 @@ public class PlatformController {
     @PostMapping
     public ResponseEntity<PlatformResponseDTO> create(@RequestBody PlatformCreateDTO platformDto) {
         Platform platform = PlatformMapper.toPlatform(platformDto);
-        PlatformResponseDTO response = PlatformMapper.toPlatformResponseDTO(platformService.create(platform));
+        PlatformResponseDTO response = PlatformMapper.toPlatformResponseDto(platformService.create(platform));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Platform> getById(@PathVariable Long id) {
+    public ResponseEntity<PlatformResponseDTO> getById(@PathVariable Long id) {
         Platform platform = platformService.getById(id);
-        return ResponseEntity.ok().body(platform);
+        PlatformResponseDTO response = PlatformMapper.toPlatformResponseDto(platform);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<Platform>> getAll() {
+    public ResponseEntity<List<PlatformNoListDTO>> getAll() {
         List<Platform> platforms = platformService.getAll();
-        return ResponseEntity.ok().body(platforms);
+        List<PlatformNoListDTO> response = PlatformMapper.toGetAllPlatformsResponseDto(platforms);
+        return ResponseEntity.ok().body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Platform> update(@PathVariable Long id, @RequestBody Platform platform) {
-        Platform responsePlatform = platformService.update(id, platform);
+    public ResponseEntity<PlatformResponseDTO> update(@PathVariable Long id, @RequestBody Platform platform) {
+        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDto(platformService.update(id, platform));
         return ResponseEntity.ok().body(responsePlatform);
     }
 
     @PostMapping("/addgame")
     public ResponseEntity<PlatformResponseDTO> addGame(@RequestParam Long platformId, @RequestParam String gameTitle) {
-        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDTO(platformService.addGame(platformId, gameTitle));
+        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDto(platformService.addGame(platformId, gameTitle));
         return ResponseEntity.ok().body(responsePlatform);
     }
 
