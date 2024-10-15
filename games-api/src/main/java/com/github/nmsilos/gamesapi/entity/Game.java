@@ -14,7 +14,6 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Game implements Serializable {
 
     @Id
@@ -34,7 +33,7 @@ public class Game implements Serializable {
     private Year releaseYear;
 
     @ManyToMany
-    @Cascade(CascadeType.ALL)
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
             name = "games_platforms",
             joinColumns = @JoinColumn(name = "game_fk"),
