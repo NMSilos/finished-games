@@ -15,6 +15,6 @@ public class PlatformResponseDTO {
 
     private Long id;
     private String name;
-    private Set<GameResponseDTO> games;
+    private Set<GameNoListDTO> games;
 
 }

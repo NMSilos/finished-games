@@ -19,6 +19,6 @@ public class GameResponseDTO {
     private String description;
     private String developerCompany;
     private Year releaseYear;
-    private Set<PlatformResponseDTO> platforms;
+    private Set<PlatformNoListDTO> platforms;
 
 }
