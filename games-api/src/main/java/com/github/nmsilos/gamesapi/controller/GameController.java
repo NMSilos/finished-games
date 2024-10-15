@@ -1,9 +1,9 @@
 package com.github.nmsilos.gamesapi.controller;
 
 import com.github.nmsilos.gamesapi.dto.GameCreateDTO;
+import com.github.nmsilos.gamesapi.dto.GameNoListDTO;
 import com.github.nmsilos.gamesapi.dto.GameResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
-import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.mapper.GameMapper;
 import com.github.nmsilos.gamesapi.service.GameService;
 import lombok.RequiredArgsConstructor;
@@ -35,14 +35,15 @@ public class GameController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Game>> getAll() {
+    public ResponseEntity<List<GameNoListDTO>> getAll() {
         List<Game> games = gameService.getAll();
-        return ResponseEntity.ok().body(games);
+        List<GameNoListDTO> noListDto = GameMapper.toGetAllGameResponseDto(games);
+        return ResponseEntity.ok().body(noListDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Game> update(@PathVariable Long id, @RequestBody Game game) {
-        Game responseGame = gameService.update(id, game);
+    public ResponseEntity<GameResponseDTO> update(@PathVariable Long id, @RequestBody Game game) {
+        GameResponseDTO responseGame = GameMapper.toGameResponseDto(gameService.update(id, game));
         return ResponseEntity.ok().body(responseGame);
     }
 
