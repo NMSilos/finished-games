@@ -1,4 +1,4 @@
-package com.github.nmsilos.gamesapi.dto;
+package com.github.nmsilos.gamesapi.dto.platform;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

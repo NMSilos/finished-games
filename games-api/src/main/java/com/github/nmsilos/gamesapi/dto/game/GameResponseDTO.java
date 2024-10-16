@@ -1,5 +1,6 @@
-package com.github.nmsilos.gamesapi.dto;
+package com.github.nmsilos.gamesapi.dto.game;
 
+import com.github.nmsilos.gamesapi.dto.platform.PlatformNoListDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
