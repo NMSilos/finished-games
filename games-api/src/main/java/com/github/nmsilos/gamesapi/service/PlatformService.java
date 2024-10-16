@@ -43,7 +43,9 @@ public class PlatformService {
 
     @Transactional(readOnly = true)
     public Platform getById(Long id) {
-        return platformRepository.findById(id).orElse(null);
+        return platformRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Platform with id '%d' not found", id))
+        );
     }
 
     @Transactional
