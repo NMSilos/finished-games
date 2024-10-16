@@ -50,9 +50,9 @@ public class PlatformService {
 
     @Transactional
     public Platform update(Long id, Platform newPlatform) {
-        Platform oldPlatform = getById(id);
-        oldPlatform.setName(newPlatform.getName());
-        return platformRepository.save(oldPlatform);
+        Platform platformToUpdate = getById(id);
+        platformToUpdate.setName(newPlatform.getName());
+        return platformRepository.save(platformToUpdate);
     }
 
     @Transactional
