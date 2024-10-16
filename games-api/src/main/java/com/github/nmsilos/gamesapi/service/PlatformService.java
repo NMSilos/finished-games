@@ -2,6 +2,7 @@ package com.github.nmsilos.gamesapi.service;
 
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
+import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
 import com.github.nmsilos.gamesapi.repository.GameRepository;
 import com.github.nmsilos.gamesapi.repository.PlatformRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,10 +43,10 @@ public class PlatformService {
     }
 
     @Transactional
-    public Platform addGame(Long platformId, String gameTitle) {
+    public Platform addGame(Long platformId, String gameSlug) {
 
         Platform platform = getById(platformId);
-        Optional<Game> game = gameRepository.findBySlug(gameTitle);
+        Optional<Game> game = gameRepository.findBySlug(gameSlug);
 
         if(game.isPresent()) {
             Game gameObj = game.get();
@@ -54,7 +55,7 @@ public class PlatformService {
             gameRepository.save(gameObj);
             return platformRepository.save(platform);
         } else {
-            throw new RuntimeException("Game not found");
+            throw new EntityNotFoundException(String.format("Game with slug '%s' not found", gameSlug));
         }
 
     }
