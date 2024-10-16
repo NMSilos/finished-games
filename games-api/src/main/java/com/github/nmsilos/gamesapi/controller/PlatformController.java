@@ -1,8 +1,8 @@
 package com.github.nmsilos.gamesapi.controller;
 
-import com.github.nmsilos.gamesapi.dto.PlatformCreateDTO;
-import com.github.nmsilos.gamesapi.dto.PlatformNoListDTO;
-import com.github.nmsilos.gamesapi.dto.PlatformResponseDTO;
+import com.github.nmsilos.gamesapi.dto.platform.PlatformCreateDTO;
+import com.github.nmsilos.gamesapi.dto.platform.PlatformNoListDTO;
+import com.github.nmsilos.gamesapi.dto.platform.PlatformResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.mapper.PlatformMapper;
 import com.github.nmsilos.gamesapi.service.PlatformService;

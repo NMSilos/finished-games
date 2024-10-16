@@ -1,5 +1,6 @@
 package com.github.nmsilos.gamesapi.service;
 
+import com.github.nmsilos.gamesapi.dto.game.GameCreateDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
@@ -51,13 +52,21 @@ public class GameService {
     }
 
     @Transactional
-    public Game update(Long id, Game newGame) {
-        Game oldGame = getById(id);
-        oldGame.setTitle(newGame.getTitle());
-        oldGame.setDescription(newGame.getDescription());
-        oldGame.setDeveloperCompany(newGame.getDeveloperCompany());
-        oldGame.setReleaseYear(newGame.getReleaseYear());
-        return gameRepository.save(oldGame);
+    public Game update(Long id, GameCreateDTO newGame) {
+        Game gameToUpdate = getById(id);
+        if (newGame.getTitle() != null) {
+            gameToUpdate.setTitle(newGame.getTitle());
+        }
+        if (newGame.getDescription() != null) {
+            gameToUpdate.setDescription(newGame.getDescription());
+        }
+        if (newGame.getDeveloperCompany() != null) {
+            gameToUpdate.setDeveloperCompany(newGame.getDeveloperCompany());
+        }
+        if (newGame.getReleaseYear() != null) {
+            gameToUpdate.setReleaseYear(newGame.getReleaseYear());
+        }
+        return gameRepository.save(gameToUpdate);
     }
 
     @Transactional

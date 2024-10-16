@@ -1,8 +1,8 @@
 package com.github.nmsilos.gamesapi.controller;
 
-import com.github.nmsilos.gamesapi.dto.GameCreateDTO;
-import com.github.nmsilos.gamesapi.dto.GameNoListDTO;
-import com.github.nmsilos.gamesapi.dto.GameResponseDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameCreateDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameNoListDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.mapper.GameMapper;
 import com.github.nmsilos.gamesapi.service.GameService;
@@ -50,7 +50,7 @@ public class GameController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GameResponseDTO> update(@PathVariable Long id, @RequestBody Game game) {
+    public ResponseEntity<GameResponseDTO> update(@PathVariable Long id, @Valid @RequestBody GameCreateDTO game) {
         GameResponseDTO responseGame = GameMapper.toGameResponseDto(gameService.update(id, game));
         return ResponseEntity.ok().body(responseGame);
     }
