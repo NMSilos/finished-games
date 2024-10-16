@@ -6,6 +6,7 @@ import com.github.nmsilos.gamesapi.dto.GameResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.mapper.GameMapper;
 import com.github.nmsilos.gamesapi.service.GameService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class GameController {
     private final GameService gameService;
 
     @PostMapping
-    public ResponseEntity<GameResponseDTO> create(@RequestBody GameCreateDTO gameDto) {
+    public ResponseEntity<GameResponseDTO> create(@RequestBody @Valid GameCreateDTO gameDto) {
         Game game = GameMapper.toGame(gameDto);
         GameResponseDTO response = GameMapper.toGameResponseDto(gameService.create(game));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
