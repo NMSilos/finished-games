@@ -1,8 +1,8 @@
 package com.github.nmsilos.gamesapi.mapper;
 
-import com.github.nmsilos.gamesapi.dto.GameCreateDTO;
-import com.github.nmsilos.gamesapi.dto.GameNoListDTO;
-import com.github.nmsilos.gamesapi.dto.GameResponseDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameCreateDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameNoListDTO;
+import com.github.nmsilos.gamesapi.dto.game.GameResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
