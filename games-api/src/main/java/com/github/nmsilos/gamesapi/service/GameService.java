@@ -3,6 +3,7 @@ package com.github.nmsilos.gamesapi.service;
 import com.github.nmsilos.gamesapi.dto.game.GameCreateDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
+import com.github.nmsilos.gamesapi.exception.DataAlreadyExistsException;
 import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
 import com.github.nmsilos.gamesapi.exception.NullElementException;
 import com.github.nmsilos.gamesapi.repository.GameRepository;
@@ -25,8 +26,12 @@ public class GameService {
     @Transactional
     public Game create(Game game) {
         try {
-            game.setSlug(SlugUtil.toSlug(game.getTitle()));
-            return gameRepository.save(game);
+            if (gameRepository.existsGameByTitle(game.getTitle())) {
+                throw new DataAlreadyExistsException(String.format("Game '%s' already exists", game.getTitle()));
+            } else {
+                game.setSlug(SlugUtil.toSlug(game.getTitle()));
+                return gameRepository.save(game);
+            }
         } catch (NullPointerException | DataIntegrityViolationException e) {
             throw new NullElementException(" field 'title' or 'developerCompany' cannot be null ");
         }
