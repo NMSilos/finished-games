@@ -3,9 +3,12 @@ package com.github.nmsilos.gamesapi.service;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
+import com.github.nmsilos.gamesapi.exception.NullElementException;
 import com.github.nmsilos.gamesapi.repository.GameRepository;
 import com.github.nmsilos.gamesapi.repository.PlatformRepository;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +25,15 @@ public class PlatformService {
 
     @Transactional
     public Platform create(Platform platform) {
-        return platformRepository.save(platform);
+        try {
+            if (platformRepository.existsByName(platform.getName())) {
+                throw new EntityExistsException(String.format("Platform '%s' already exists", platform.getName()));
+            } else {
+                return platformRepository.save(platform);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new NullElementException(" field 'name' cannot be null ");
+        }
     }
 
     @Transactional(readOnly = true)

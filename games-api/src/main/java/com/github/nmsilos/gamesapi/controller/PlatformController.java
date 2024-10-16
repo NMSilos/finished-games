@@ -6,6 +6,7 @@ import com.github.nmsilos.gamesapi.dto.platform.PlatformResponseDTO;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.mapper.PlatformMapper;
 import com.github.nmsilos.gamesapi.service.PlatformService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class PlatformController {
     private final PlatformService platformService;
 
     @PostMapping
-    public ResponseEntity<PlatformResponseDTO> create(@RequestBody PlatformCreateDTO platformDto) {
+    public ResponseEntity<PlatformResponseDTO> create(@RequestBody @Valid PlatformCreateDTO platformDto) {
         Platform platform = PlatformMapper.toPlatform(platformDto);
         PlatformResponseDTO response = PlatformMapper.toPlatformResponseDto(platformService.create(platform));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
