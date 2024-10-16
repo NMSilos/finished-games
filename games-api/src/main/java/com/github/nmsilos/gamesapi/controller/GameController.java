@@ -36,7 +36,7 @@ public class GameController {
     }
 
     @GetMapping("/game")
-    public ResponseEntity<GameResponseDTO> getById(@RequestParam String slug) {
+    public ResponseEntity<GameResponseDTO> getBySlug(@RequestParam String slug) {
         Game game = gameService.getBySlug(slug);
         GameResponseDTO response = GameMapper.toGameResponseDto(game);
         return ResponseEntity.ok().body(response);
