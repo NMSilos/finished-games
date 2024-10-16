@@ -1,5 +1,6 @@
 package com.github.nmsilos.gamesapi.exception.handler;
 
+import com.github.nmsilos.gamesapi.exception.DataAlreadyExistsException;
 import com.github.nmsilos.gamesapi.exception.DefaultErrorMessage;
 import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
 import com.github.nmsilos.gamesapi.exception.NullElementException;
@@ -22,6 +23,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<DefaultErrorMessage> handleEntityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new DefaultErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
+    }
+
+    @ExceptionHandler(DataAlreadyExistsException.class)
+    public ResponseEntity<DefaultErrorMessage> handleDataAlreadyExistsException(DataAlreadyExistsException ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new DefaultErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
 
 }
