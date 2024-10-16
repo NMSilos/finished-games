@@ -35,6 +35,13 @@ public class GameController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/game")
+    public ResponseEntity<GameResponseDTO> getById(@RequestParam String slug) {
+        Game game = gameService.getBySlug(slug);
+        GameResponseDTO response = GameMapper.toGameResponseDto(game);
+        return ResponseEntity.ok().body(response);
+    }
+
     @GetMapping
     public ResponseEntity<List<GameNoListDTO>> getAll() {
         List<Game> games = gameService.getAll();

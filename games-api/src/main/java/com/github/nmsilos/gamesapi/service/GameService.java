@@ -40,8 +40,9 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public Game getBySlug(String slug) {
-        Optional<Game> game = gameRepository.findBySlug(slug);
-        return game.orElse(null);
+        return gameRepository.findBySlug(slug).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Game with slug '%s' not found", slug))
+        );
     }
 
     @Transactional(readOnly = true)
