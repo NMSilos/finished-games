@@ -23,6 +23,8 @@ public class Game implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
+    private String slug;
+
     @Column(name = "description")
     private String description;
 

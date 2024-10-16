@@ -48,8 +48,8 @@ public class PlatformController {
     }
 
     @PostMapping("/addgame")
-    public ResponseEntity<PlatformResponseDTO> addGame(@RequestParam Long platformId, @RequestParam String gameTitle) {
-        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDto(platformService.addGame(platformId, gameTitle));
+    public ResponseEntity<PlatformResponseDTO> addGame(@RequestParam Long platformId, @RequestParam String gameSlug) {
+        PlatformResponseDTO responsePlatform = PlatformMapper.toPlatformResponseDto(platformService.addGame(platformId, gameSlug));
         return ResponseEntity.ok().body(responsePlatform);
     }
 

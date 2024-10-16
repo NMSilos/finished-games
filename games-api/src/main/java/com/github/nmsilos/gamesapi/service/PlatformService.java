@@ -45,7 +45,7 @@ public class PlatformService {
     public Platform addGame(Long platformId, String gameTitle) {
 
         Platform platform = getById(platformId);
-        Optional<Game> game = gameRepository.findByTitle(gameTitle);
+        Optional<Game> game = gameRepository.findBySlug(gameTitle);
 
         if(game.isPresent()) {
             Game gameObj = game.get();

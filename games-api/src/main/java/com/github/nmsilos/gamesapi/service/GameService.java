@@ -3,6 +3,7 @@ package com.github.nmsilos.gamesapi.service;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
 import com.github.nmsilos.gamesapi.repository.GameRepository;
+import com.github.nmsilos.gamesapi.util.SlugUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public class GameService {
 
     @Transactional
     public Game create(Game game) {
+        game.setSlug(SlugUtil.toSlug(game.getTitle()));
+        System.out.println(game.getSlug());
         return gameRepository.save(game);
     }
 
@@ -28,8 +31,8 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public Game getByTitle(String title) {
-        Optional<Game> game = gameRepository.findByTitle(title);
+    public Game getBySlug(String slug) {
+        Optional<Game> game = gameRepository.findBySlug(slug);
         return game.orElse(null);
     }
 
