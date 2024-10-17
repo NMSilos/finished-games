@@ -1,7 +1,6 @@
 package com.github.nmsilos.usersapi.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +26,6 @@ public class User {
     private String name;
 
     @Column(name = "email", unique = true, nullable = false)
-    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String email;
 
     public User(String username, String password, String name, String email) {
