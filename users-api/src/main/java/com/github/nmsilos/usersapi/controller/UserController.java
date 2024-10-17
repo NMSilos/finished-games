@@ -7,6 +7,7 @@ import com.github.nmsilos.usersapi.mapper.UserMapper;
 import com.github.nmsilos.usersapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,12 @@ public class UserController {
         User user = UserMapper.toUser(userDto);
         UserResponseDTO response = UserMapper.toUserResponseDto(userService.create(user));
         return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> getById(@PathVariable Long id) {
+        UserResponseDTO response = UserMapper.toUserResponseDto(userService.getbyId(id));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }
