@@ -5,6 +5,8 @@ import com.github.nmsilos.usersapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,4 +21,7 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
 }

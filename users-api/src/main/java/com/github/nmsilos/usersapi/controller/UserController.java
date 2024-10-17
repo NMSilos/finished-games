@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +31,13 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getById(@PathVariable Long id) {
         UserResponseDTO response = UserMapper.toUserResponseDto(userService.getbyId(id));
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDTO>> getAll() {
+        List<User> users = userService.getAll();
+        List<UserResponseDTO> response = UserMapper.toGetAllUsers(users);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
