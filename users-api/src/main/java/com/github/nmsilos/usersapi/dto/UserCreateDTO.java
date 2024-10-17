@@ -26,7 +26,7 @@ public class UserCreateDTO {
     @Size(max = 50)
     private String name;
 
-    @Email
+    @NotNull
     private String email;
 
 }
