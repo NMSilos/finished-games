@@ -7,6 +7,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserMapper {
 
@@ -16,6 +18,10 @@ public class UserMapper {
 
     public static User toUser(final UserCreateDTO dto) {
         return new ModelMapper().map(dto, User.class);
+    }
+
+    public static List<UserResponseDTO> toGetAllUsers(List<User> games) {
+        return games.stream().map(UserMapper::toUserResponseDto).toList();
     }
 
 }
