@@ -1,9 +1,9 @@
-package com.github.nmsilos.gamesapi.exception.handler;
+package com.github.nmsilos.gamesapi.exception;
 
-import com.github.nmsilos.gamesapi.exception.DataAlreadyExistsException;
-import com.github.nmsilos.gamesapi.exception.DefaultErrorMessage;
-import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
-import com.github.nmsilos.gamesapi.exception.NullElementException;
+import com.github.nmsilos.gamesapi.exception.custom.DataAlreadyExistsException;
+import com.github.nmsilos.gamesapi.exception.custom.DefaultErrorMessage;
+import com.github.nmsilos.gamesapi.exception.custom.EntityNotFoundException;
+import com.github.nmsilos.gamesapi.exception.custom.NullElementException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

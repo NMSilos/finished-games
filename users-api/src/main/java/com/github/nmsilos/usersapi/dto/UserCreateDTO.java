@@ -15,11 +15,11 @@ import jakarta.validation.constraints.NotNull;
 public class UserCreateDTO {
 
     @NotNull
-    @Size(min = 6, max = 20)
+    @Size(min = 6, max = 20, message = "username must be between 6 and 20 characters")
     private String username;
 
     @NotNull
-    @Size(min = 8)
+    @Size(min = 8, message = "password must have at least 8 characters")
     private String password;
 
     @NotNull
