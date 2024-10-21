@@ -2,10 +2,9 @@ package com.github.nmsilos.usersapi.service;
 
 import com.github.nmsilos.usersapi.dto.GameResponseDTO;
 import com.github.nmsilos.usersapi.entity.User;
-import com.github.nmsilos.usersapi.exception.custom.InvalidArgumentException;
+import com.github.nmsilos.usersapi.exception.custom.EntityNotFoundException;
 import com.github.nmsilos.usersapi.feignclient.GameFeignClient;
 import com.github.nmsilos.usersapi.repository.UserRepository;
-import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +25,9 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(String.format("User with id '%s' not found", id))
+        );
     }
 
     @Transactional(readOnly = true)
