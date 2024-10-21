@@ -37,6 +37,9 @@ public class UserService {
 
     @Transactional
     public void delete(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new EntityNotFoundException(String.format("User with id '%s' not found", id));
+        }
         userRepository.deleteById(id);
     }
 
