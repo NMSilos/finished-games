@@ -3,8 +3,10 @@ package com.github.nmsilos.usersapi.service;
 import com.github.nmsilos.usersapi.dto.GameResponseDTO;
 import com.github.nmsilos.usersapi.entity.User;
 import com.github.nmsilos.usersapi.exception.custom.EntityNotFoundException;
+import com.github.nmsilos.usersapi.exception.custom.InternalServerErrorException;
 import com.github.nmsilos.usersapi.feignclient.GameFeignClient;
 import com.github.nmsilos.usersapi.repository.UserRepository;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +46,13 @@ public class UserService {
     }
 
     public GameResponseDTO getGameById(Long id) {
-        return gameFeignClient.getById(id).getBody();
+        try {
+            return gameFeignClient.getById(id).getBody();
+        } catch (FeignException.FeignClientException e) {
+            throw new EntityNotFoundException(String.format("Game with id '%s' not found", id));
+        } catch (Exception e) {
+            throw new InternalServerErrorException("Server error: try again in a few minutes");
+        }
     }
 
     @Transactional

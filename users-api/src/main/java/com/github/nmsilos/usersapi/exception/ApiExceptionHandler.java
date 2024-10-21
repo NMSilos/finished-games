@@ -2,6 +2,7 @@ package com.github.nmsilos.usersapi.exception;
 
 import com.github.nmsilos.usersapi.exception.custom.DefaultErrorMessage;
 import com.github.nmsilos.usersapi.exception.custom.EntityNotFoundException;
+import com.github.nmsilos.usersapi.exception.custom.InternalServerErrorException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,6 +29,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<DefaultErrorMessage>handleEntityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new DefaultErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<DefaultErrorMessage>handleInternalServerErrorException(InternalServerErrorException ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DefaultErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
     }
 
 
