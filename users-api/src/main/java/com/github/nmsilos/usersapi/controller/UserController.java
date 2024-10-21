@@ -1,5 +1,6 @@
 package com.github.nmsilos.usersapi.controller;
 
+import com.github.nmsilos.usersapi.dto.GameResponseDTO;
 import com.github.nmsilos.usersapi.dto.UserCreateDTO;
 import com.github.nmsilos.usersapi.dto.UserResponseDTO;
 import com.github.nmsilos.usersapi.entity.User;
@@ -28,6 +29,12 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping("/addgame")
+    public ResponseEntity<Void> addGameToUser(@RequestParam @Valid Long userId, @RequestParam @Valid Long gameId) {
+        userService.addGameToUser(userId, gameId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getById(@PathVariable Long id) {
         UserResponseDTO response = UserMapper.toUserResponseDto(userService.getById(id));
@@ -41,15 +48,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/getGames")
+    public ResponseEntity<List<GameResponseDTO>> getAllGamesFromUser(@RequestParam @Valid Long userId) {
+        List<GameResponseDTO> games = userService.getAllGamesFromUser(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(games);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/addgame")
-    public ResponseEntity<Void> addGameToUser(@RequestParam @Valid Long userId, @RequestParam @Valid Long gameId) {
-        userService.addGameToUser(userId, gameId);
         return ResponseEntity.noContent().build();
     }
 

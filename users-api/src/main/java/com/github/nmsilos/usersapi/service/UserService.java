@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,5 +61,15 @@ public class UserService {
         GameResponseDTO game = getGameById(gameId);
         User user = getById(userId);
         user.getIdGames().add(game.getId());
+    }
+
+    @Transactional
+    public List<GameResponseDTO> getAllGamesFromUser(Long userId) {
+        List<Long> idGames = getById(userId).getIdGames();
+        List<GameResponseDTO> games = new ArrayList<>();
+        for (Long idGame : idGames) {
+            games.add(getGameById(idGame));
+        }
+        return games;
     }
 }
