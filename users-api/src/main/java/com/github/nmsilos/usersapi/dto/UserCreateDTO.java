@@ -27,7 +27,8 @@ public class UserCreateDTO {
     private String name;
 
     @NotNull
-    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            message = "email must have a valid form [ex: email@email.com]")
     private String email;
 
 }

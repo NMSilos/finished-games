@@ -3,12 +3,14 @@ package com.github.nmsilos.usersapi.controller;
 import com.github.nmsilos.usersapi.dto.UserCreateDTO;
 import com.github.nmsilos.usersapi.dto.UserResponseDTO;
 import com.github.nmsilos.usersapi.entity.User;
+import com.github.nmsilos.usersapi.exception.custom.InvalidArgumentException;
 import com.github.nmsilos.usersapi.mapper.UserMapper;
 import com.github.nmsilos.usersapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
