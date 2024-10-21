@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -27,6 +30,9 @@ public class User {
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+
+    @ElementCollection
+    private List<Long> idGames = new ArrayList<>();
 
     public User(String username, String password, String name, String email) {
         this.username = username;

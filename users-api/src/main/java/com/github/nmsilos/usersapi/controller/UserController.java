@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getById(@PathVariable Long id) {
-        UserResponseDTO response = UserMapper.toUserResponseDto(userService.getbyId(id));
+        UserResponseDTO response = UserMapper.toUserResponseDto(userService.getById(id));
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -44,6 +44,12 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/addgame")
+    public ResponseEntity<Void> addGameToUser(@RequestParam @Valid Long userId, @RequestParam @Valid Long gameId) {
+        userService.addGameToUser(userId, gameId);
         return ResponseEntity.noContent().build();
     }
 
