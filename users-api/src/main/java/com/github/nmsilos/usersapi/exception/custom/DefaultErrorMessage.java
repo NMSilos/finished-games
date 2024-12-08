@@ -1,4 +1,4 @@
-package com.github.nmsilos.gamesapi.exception;
+package com.github.nmsilos.usersapi.exception.custom;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,9 +3,9 @@ package com.github.nmsilos.gamesapi.service;
 import com.github.nmsilos.gamesapi.dto.game.GameCreateDTO;
 import com.github.nmsilos.gamesapi.entity.Game;
 import com.github.nmsilos.gamesapi.entity.Platform;
-import com.github.nmsilos.gamesapi.exception.DataAlreadyExistsException;
-import com.github.nmsilos.gamesapi.exception.EntityNotFoundException;
-import com.github.nmsilos.gamesapi.exception.NullElementException;
+import com.github.nmsilos.gamesapi.exception.custom.DataAlreadyExistsException;
+import com.github.nmsilos.gamesapi.exception.custom.EntityNotFoundException;
+import com.github.nmsilos.gamesapi.exception.custom.NullElementException;
 import com.github.nmsilos.gamesapi.repository.GameRepository;
 import com.github.nmsilos.gamesapi.util.SlugUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
