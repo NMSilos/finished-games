@@ -21,11 +21,11 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final GameFeignClient gameFeignClient;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
     public User create(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -75,4 +75,9 @@ public class UserService {
         }
         return games;
     }
+
+    private boolean checkPassword(String password, String encodedPassword) {
+        return passwordEncoder.matches(password, encodedPassword);
+    }
+
 }
