@@ -25,6 +25,7 @@ public class UserService {
 
     @Transactional
     public User create(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
