@@ -8,6 +8,7 @@ import com.github.nmsilos.usersapi.feignclient.GameFeignClient;
 import com.github.nmsilos.usersapi.repository.UserRepository;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final GameFeignClient gameFeignClient;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public User create(User user) {
